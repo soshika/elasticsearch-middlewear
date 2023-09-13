@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  backup-api:
+    build: .
+    restart: always
+    network_mode: "host"
+    privileged: true
+    container_name: middleware-api
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
+        labels: "production_status"
+        env: "os"
+    labels:
+      production_status: "testing"
+    environment:
+      - os=ubuntu
+    volumes:
+      - /root/alphabet/middlewareAPI:/usr/src/app
